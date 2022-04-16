@@ -1,7 +1,7 @@
-def secret = 'Server'
-def server = 'oman@103.174.114.40'
-def directory = 'wayshub-frontend'
-def branch = 'main'
+def secret = 'Server' //default to your jenkins credential
+def server = 'oman@103.174.114.40' //your server name
+def directory = 'wayshub-frontend' //directory on the server
+def branch = 'main' //branch
 
 pipeline{
     agent any
