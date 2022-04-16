@@ -3,27 +3,27 @@ def server = 'oman@103.174.114.40'
 def directory = 'wayshub-frontend'
 def branch = 'main'
 
-pipeline(
+pipeline{
     agent any
-    stages(
+    stages{
         stage ('docker delete & git pull'){
-            steps(
-                sshagent ([secret])(
-                    sh """ssh -o StrictHostKeyChecking=no $(server) << EOF
-                    cd $(directory)
+            steps{
+                sshagent([secret]) {
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    cd ${directory}
                     docker-compose down
-                    docker system prume -f
-                    git pull origin $(branch)
+                    docker system prune -f
+                    git pull origin ${branch}
                     exit
                     EOF"""
-                )
-            )
+                }
+            }
         }
         stage ('docker build'){
             steps{
-                sshagent([secret]){
-                    sh """ssh -o StrictHostKeyChecking=no $(server) << EOF
-                    cd $(directory)
+                sshagent([secret]) {
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    cd ${directory}
                     docker-compose build
                     exit
                     EOF"""
@@ -31,15 +31,15 @@ pipeline(
             }
         }
         stage ('docker up'){
-            steps(
-                sshagent ([secret])(
-                    sh """ssh -o StrictHostKeyChecking=no $(server) << EOF
-                    cd $(directory)
+            steps{
+                sshagent([secret]) {
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    cd ${directory}
                     docker-compose up -d
                     exit
                     EOF"""
-                )
-            )
+                }
+            }
         }
-    )
-)
+    }
+}
