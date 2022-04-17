@@ -1,7 +1,7 @@
 version: '3.7'
 services:
         frontend:
-                container_name: frontend
+                container_name: frontend-cicd
                 image: omananshari/wayshub-fe:1.0
                 stdin_open: true
                 ports:
