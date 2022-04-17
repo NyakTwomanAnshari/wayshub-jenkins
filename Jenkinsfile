@@ -1,4 +1,4 @@
-def secret = 'Server' //default to your jenkins credential
+def secret = 'server' //default to your jenkins credential
 def server = 'oman@103.174.114.40' //your server name
 def directory = 'wayshub-frontend' //directory on the server
 def branch = 'main' //branch
